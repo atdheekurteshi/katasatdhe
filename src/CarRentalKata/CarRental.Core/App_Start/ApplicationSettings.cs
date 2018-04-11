@@ -5,6 +5,6 @@
         /// <summary>
         /// CarRentalDbConnectionStringName variable declaration 
         /// </summary>
-        public static string CarRentalDbConnectionStringName => "CarRentalDb";
+       public static string CarRentalDbConnectionStringName => "CarRentalDb";
     }
 }

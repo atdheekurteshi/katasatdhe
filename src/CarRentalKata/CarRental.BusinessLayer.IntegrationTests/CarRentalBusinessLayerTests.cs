@@ -62,6 +62,23 @@
             var expectedResult = 2;
             Assert.True(actualResult.Count == expectedResult);
         }
+        [Fact]
+        public void SearchInBerlin_Returns2Cars()
+        {
+            //Arrange
+            var systemUnderTest = new CarService();
+            var requestedReservationStart = new DateTime(2013, 12, 29, 8, 0, 0);
+            var requestedReservationEnd = new DateTime(2014, 09, 28, 8, 0, 0);
+            var anonymousCustomerDoSearch = _autoFixture.Create<CustomerModel>();
+            const string cityToSearchFor = "Berlin";
+
+            //Act
+            var actualResult = systemUnderTest.FindAvailableCarsForRental(anonymousCustomerDoSearch, requestedReservationStart, requestedReservationEnd, cityToSearchFor);
+
+            //Assert
+            var expectedResult = 3;
+            Assert.True(actualResult.Count == expectedResult);
+        }
 
         [Fact]
         public void SearchResult_Returns_CarsWith_ViennaOffice()
@@ -99,6 +116,27 @@
             var expectedResult = 195.0m;
             foreach (var price in actualResult) { Assert.True(price == expectedResult); }
         }
+
+        [Fact]
+        public void CarPriceOfCarTypeD_IsCorrectCalculated_ForCustomerOfType_Consumer()
+        {
+            //Arrange
+            var systemUnderTest = new CarService();
+            var carModel = new CarModel();
+            var requestedReservationStart = new DateTime(2015, 03, 31, 8, 0, 0);
+            var requestedReservationEnd = new DateTime(2015, 04, 01, 8, 0, 0);
+            var customerOfTypeConsumerDoSearch = _autoFixture.Build<CustomerModel>().With(property => property.CustomerType, CustomerModel.Consumer).Create();
+            const string cityToSearchFor = "München";
+
+            //Act
+            var actualResult = systemUnderTest.FindAvailableCarsForRental(customerOfTypeConsumerDoSearch, requestedReservationStart, requestedReservationEnd, cityToSearchFor)
+                                              .Where(availableCar => availableCar.Key.Category == CarModel.Luxury).Select(result => result.Value);
+
+            //Assert
+            var expectedResult = 1440.0m;
+            foreach (var price in actualResult) { Assert.True(price == expectedResult); }
+        }
+
 
         [Fact]
         public void NewCustomerIs_Created()

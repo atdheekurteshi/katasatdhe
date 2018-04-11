@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace CarRental.Models
 {
-    public class CustomerModel:Customer
+    public class CustomerModel : Customer
     {
         //public const int Consumer = 1;
         //public const int ConsumerPremium = Consumer + 1;
@@ -21,6 +21,5 @@ namespace CarRental.Models
         //public string Street { get; set; }
         //public string City { get; set; }
         //public string Postcode { get; set; }
-
     }
 }

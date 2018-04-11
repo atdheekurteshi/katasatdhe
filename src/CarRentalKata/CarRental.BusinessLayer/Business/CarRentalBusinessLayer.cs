@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using CarRental.Models;
 using CarRental.Services;
 

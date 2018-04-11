@@ -3,7 +3,7 @@ using CarRental.Entities;
 
 namespace CarRental.Models
 {
-    public class CarModel:Car
+    public class CarModel : Car
     {
         //public const string Small = "A";
         //public const string Medium = "B";
@@ -17,6 +17,11 @@ namespace CarRental.Models
         //public string Category { get; set; }
         //public OfficeModel Office { get; set; }
         //public int OfficeId { get; set; }
+
+        /// <summary>
+        /// AddKilometers method 
+        /// </summary>
+        /// <param name="kilometersDriven"></param>
         public void AddKilometers(float kilometersDriven)
         {
             KilometerReading += kilometersDriven;

@@ -4,7 +4,7 @@ using System.Runtime;
 
 namespace CarRental.Models
 {
-    public class OfficeModel:Office
+    public class OfficeModel : Office
     {
         //public int OfficeId { get; set; }
         //public string Street { get; set; }

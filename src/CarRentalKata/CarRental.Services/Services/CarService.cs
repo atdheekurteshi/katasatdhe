@@ -2,6 +2,7 @@
 using CarRental.Models;
 using CarRental.Services;
 using System;
+using CarRental.Entities;
 
 namespace CarRental.Services
 {
@@ -28,6 +29,7 @@ namespace CarRental.Services
         /// </summary>
         public CarService calculatePriceForAvaliableCars;
 
+
         /// <summary>
         /// CarService constructor, here we inject the reservation service instance and the result instance so we can obtain them faster.
         /// </summary>
@@ -51,12 +53,13 @@ namespace CarRental.Services
             try
             {
                 availableCars = reservationService.FindAvailableCars(requestedReservationStartDateTime, requestedReservationEndDateTime, city);
+
                 // Query through availableCars and select them based on CustomerType
                 foreach (var availableCar in availableCars)
                 {
                     switch (availableCar.Category)
                     {
-                        case "A":
+                        case CarModel.Small:
                             {
                                 calculatePrice = 50 * (requestedReservationEndDateTime - requestedReservationStartDateTime).Days;
 
@@ -72,7 +75,7 @@ namespace CarRental.Services
                                 break;
                             }
 
-                        case "B":
+                        case CarModel.Medium:
                             {
                                 calculatePrice = 65 * (requestedReservationEndDateTime - requestedReservationStartDateTime).Days;
 
@@ -94,7 +97,7 @@ namespace CarRental.Services
                                 break;
                             }
 
-                        case "C":
+                        case CarModel.Large:
                             {
                                 calculatePrice = 90 * (requestedReservationEndDateTime - requestedReservationStartDateTime).Days;
 
@@ -122,7 +125,7 @@ namespace CarRental.Services
                                 break;
                             }
 
-                        case "D":
+                        case CarModel.Luxury:
                             {
                                 calculatePrice = 120 * (requestedReservationEndDateTime - requestedReservationStartDateTime).Days;
 
@@ -191,6 +194,5 @@ namespace CarRental.Services
             // Return CalculatePriceForAvaliableCarsForRental.Results
             return calculatePriceForAvaliableCars.result.Count > 0 ? calculatePriceForAvaliableCars.result : null;
         }
-
     }
 }
