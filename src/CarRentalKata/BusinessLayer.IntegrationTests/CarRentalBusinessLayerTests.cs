@@ -52,7 +52,7 @@
             var systemUnderTest = new CarService();
             var requestedReservationStart = new DateTime(2014, 09, 22, 8, 0, 0);
             var requestedReservationEnd = new DateTime(2014, 09, 25, 8, 0, 0);
-            var anonymousCustomerDoSearch = _autoFixture.Create<CustomerModel>();
+            var anonymousCustomerDoSearch = _autoFixture.Create<Customer>();
             const string cityToSearchFor = "Wien";
 
             //Act
@@ -69,7 +69,7 @@
             var systemUnderTest = new CarService();
             var requestedReservationStart = new DateTime(2013, 12, 29, 8, 0, 0);
             var requestedReservationEnd = new DateTime(2014, 09, 28, 8, 0, 0);
-            var anonymousCustomerDoSearch = _autoFixture.Create<CustomerModel>();
+            var anonymousCustomerDoSearch = _autoFixture.Create<Customer>();
             const string cityToSearchFor = "Berlin";
 
             //Act
@@ -86,7 +86,7 @@
             var systemUnderTest = new CarService();
             var requestedReservationStart = new DateTime(2014, 05, 24, 8, 0, 0);
             var requestedReservationEnd = new DateTime(2014, 06, 01, 8, 0, 0);
-            var anonymousCustomerDoSearch = _autoFixture.Create<CustomerModel>();
+            var anonymousCustomerDoSearch = _autoFixture.Create<Customer>();
             const string cityToSearchFor = "Salzburg";
 
             //Act
@@ -104,7 +104,7 @@
             var systemUnderTest = new CarService();
             var requestedReservationStart = new DateTime(2014, 05, 24, 8, 0, 0);
             var requestedReservationEnd = new DateTime(2017, 06, 01, 8, 0, 0);
-            var anonymousCustomerDoSearch = _autoFixture.Create<CustomerModel>();
+            var anonymousCustomerDoSearch = _autoFixture.Create<Customer>();
             const string cityToSearchFor = "Bratislava";
 
             //Act
@@ -125,7 +125,7 @@
             var systemUnderTest = new CarService();
             var requestedReservationStart = new DateTime(2014, 01, 29, 8, 0, 0);
             var requestedReservationEnd = new DateTime(2014, 04, 02, 8, 0, 0);
-            var anonymousCustomerDoSearch = _autoFixture.Create<CustomerModel>();
+            var anonymousCustomerDoSearch = _autoFixture.Create<Customer>();
             const string cityToSearchFor = "Prag";
 
             //Act
@@ -135,13 +135,13 @@
             var expectedResult = 2;
             Assert.True(actualResult.Count == expectedResult);
         }
-        public void SearchInMuenchen_Returns2Cars()
+        public void SearchInMuenchen_Returns3Cars()
         {
             //Arrange
             var systemUnderTest = new CarService();
             var requestedReservationStart = new DateTime(2015, 03, 31, 8, 0, 0);
             var requestedReservationEnd = new DateTime(2017, 11, 18, 8, 0, 0);
-            var anonymousCustomerDoSearch = _autoFixture.Create<CustomerModel>();
+            var anonymousCustomerDoSearch = _autoFixture.Create<Customer>();
             const string cityToSearchFor = "München";
 
             //Act
@@ -159,7 +159,7 @@
             var systemUnderTest = new CarService();
             var requestedReservationStart = new DateTime(2014, 09, 22, 8, 0, 0);
             var requestedReservationEnd = new DateTime(2014, 09, 25, 8, 0, 0);
-            var anonymousCustomerDoSearch = _autoFixture.Create<CustomerModel>();
+            var anonymousCustomerDoSearch = _autoFixture.Create<Customer>();
             const string cityToSearchFor = "Wien";
 
             //Act
@@ -176,7 +176,7 @@
             var systemUnderTest = new CarService();
             var requestedReservationStart = new DateTime(2013, 12, 29, 8, 0, 0);
             var requestedReservationEnd = new DateTime(2014, 09, 28, 8, 0, 0);
-            var anonymousCustomerDoSearch = _autoFixture.Create<CustomerModel>();
+            var anonymousCustomerDoSearch = _autoFixture.Create<Customer>();
             const string cityToSearchFor = "Berlin";
 
             //Act
@@ -193,7 +193,7 @@
             var systemUnderTest = new CarService();
             var requestedReservationStart = new DateTime(2015, 03, 31, 8, 0, 0);
             var requestedReservationEnd = new DateTime(2017, 11, 18, 8, 0, 0);
-            var anonymousCustomerDoSearch = _autoFixture.Create<CustomerModel>();
+            var anonymousCustomerDoSearch = _autoFixture.Create<Customer>();
             const string cityToSearchFor = "München";
 
             //Act
@@ -210,7 +210,7 @@
             var systemUnderTest = new CarService();
             var requestedReservationStart = new DateTime(2014, 01, 29, 8, 0, 0);
             var requestedReservationEnd = new DateTime(2014, 04, 02, 8, 0, 0);
-            var anonymousCustomerDoSearch = _autoFixture.Create<CustomerModel>();
+            var anonymousCustomerDoSearch = _autoFixture.Create<Customer>();
             const string cityToSearchFor = "Prag";
 
             //Act
@@ -227,7 +227,7 @@
             var systemUnderTest = new CarService();
             var requestedReservationStart = new DateTime(2014, 05, 24, 8, 0, 0);
             var requestedReservationEnd = new DateTime(2017, 06, 01, 8, 0, 0);
-            var anonymousCustomerDoSearch = _autoFixture.Create<CustomerModel>();
+            var anonymousCustomerDoSearch = _autoFixture.Create<Customer>();
             const string cityToSearchFor = "Bratislava";
 
             //Act
@@ -244,7 +244,7 @@
             var systemUnderTest = new CarService();
             var requestedReservationStart = new DateTime(2014, 05, 24, 8, 0, 0);
             var requestedReservationEnd = new DateTime(2014, 06, 01, 8, 0, 0);
-            var anonymousCustomerDoSearch = _autoFixture.Create<CustomerModel>();
+            var anonymousCustomerDoSearch = _autoFixture.Create<Customer>();
             const string cityToSearchFor = "Salzburg";
 
             //Act
@@ -261,7 +261,7 @@
             var systemUnderTest = new CarService();
             var requestedReservationStart = new DateTime(2014, 09, 22, 8, 0, 0);
             var requestedReservationEnd = new DateTime(2014, 09, 25, 8, 0, 0);
-            var customerOfTypeConsumerDoSearch = _autoFixture.Build<CustomerModel>().With(property => property.CustomerType, CustomerModel.Consumer).Create();
+            var customerOfTypeConsumerDoSearch = _autoFixture.Build<Customer>().With(property => property.CustomerType, Customer.Consumer).Create();
             const string cityToSearchFor = "Wien";
 
             //Act
@@ -281,7 +281,7 @@
             var carModel = new CarModel();
             var requestedReservationStart = new DateTime(2015, 03, 31, 8, 0, 0);
             var requestedReservationEnd = new DateTime(2015, 04, 01, 8, 0, 0);
-            var customerOfTypeConsumerDoSearch = _autoFixture.Build<CustomerModel>().With(property => property.CustomerType, CustomerModel.Consumer).Create();
+            var customerOfTypeConsumerDoSearch = _autoFixture.Build<Customer>().With(property => property.CustomerType, Customer.Consumer).Create();
             const string cityToSearchFor = "München";
 
             //Act
@@ -299,7 +299,7 @@
         {
             //Arrange
             var systemUnderTest = new CarRentalBusinessLayer();
-            var customerToBeCreated = _autoFixture.Build<CustomerModel>().Without(property => property.CustomerId).With(property => property.CustomerType, Customer.Consumer).With(property => property.LastName, customerLastName)
+            var customerToBeCreated = _autoFixture.Build<Customer>().Without(property => property.CustomerId).With(property => property.CustomerType, Customer.Consumer).With(property => property.LastName, customerLastName)
                                                   .Create();
             var expectedResult = customerToBeCreated;
             var customer = new Customer();
