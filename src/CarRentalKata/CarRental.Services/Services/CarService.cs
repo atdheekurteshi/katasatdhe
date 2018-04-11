@@ -50,8 +50,8 @@ namespace CarRental.Services
         public void CalculatePriceForAvaliableCarsForRental(CustomerModel customer, DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city)
         {
             // Reserve all avaliablecarse peer requestedReservationStartDateTime and requestedReservationEndDateTime and city
-            try
-            {
+            //try
+            //{
                 availableCars = reservationService.FindAvailableCars(requestedReservationStartDateTime, requestedReservationEndDateTime, city);
 
                 // Query through availableCars and select them based on CustomerType
@@ -162,11 +162,11 @@ namespace CarRental.Services
                     // Return the calulcated price for the avaliable cars
                     result.Add(availableCar, calculatePrice);
                 }
-            }
-            catch
-            {
-                throw new ArgumentNullException();
-            }
+           // }
+            //catch
+            //{
+            //    throw new ArgumentNullException();
+            //}
 
         }
 
@@ -183,14 +183,14 @@ namespace CarRental.Services
             // Declear calculatePriceForAvaliableCars 
             calculatePriceForAvaliableCars = new CarService();
             // Call calculatePriceForAvaliableCars.CalculatePriceForAvaliableCarsForRental
-            try
-            {
+           //try
+           // {
                 calculatePriceForAvaliableCars.CalculatePriceForAvaliableCarsForRental(customer, requestedReservationStartDateTime, requestedReservationEndDateTime, city);
-            }
-            catch
-            {
-                throw new ArgumentNullException();
-            }
+           // }
+            //catch
+            //{
+            //    throw new ArgumentNullException();
+            //}
             // Return CalculatePriceForAvaliableCarsForRental.Results
             return calculatePriceForAvaliableCars.result.Count > 0 ? calculatePriceForAvaliableCars.result : null;
         }

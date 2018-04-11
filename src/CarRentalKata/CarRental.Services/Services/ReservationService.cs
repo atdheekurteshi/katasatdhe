@@ -45,8 +45,8 @@ namespace CarRental.Services
 
             var availableCars = carRentalDbContext.Cars.Where(car =>
                                                                       !idsOfCarsNotAvailableNow.Contains(car.CarId) && car.Office.City == cityForRequestedReservation);
-            try
-            {
+           // try
+            //{
                 resultAvailableCars = availableCars.Select(availableCar => new CarModel
                 {
                     CarId = availableCar.CarId,
@@ -64,11 +64,11 @@ namespace CarRental.Services
                         Street = availableCar.Office.Street
                     }
                 }).ToList();
-            }
-            catch
-            {
-                throw new ArgumentNullException();
-            }
+            //}
+            //catch
+            //{
+            //    throw new ArgumentNullException();
+            //}
 
 
             return resultAvailableCars;

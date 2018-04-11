@@ -42,31 +42,31 @@ namespace CarRental.Services
         /// <param name="customerModel"></param>
         public void AddCustomer(CustomerModel customerModel)
         {
-            try
+            // try
+            //{
+            // NewCustomerEntity entry
+            newCustomerEntity = new Customer
             {
-                // NewCustomerEntity entry
-                newCustomerEntity = new Customer
-                {
-                    City = customerModel.City,
-                    CustomerType = customerModel.CustomerType,
-                    Street = customerModel.Street,
-                    Postcode = customerModel.Postcode,
-                    CustomerId = customerModel.CustomerId,
-                    CustomerNumber = customerModel.CustomerNumber,
-                    DateOfBirth = customerModel.DateOfBirth,
-                    FirstName = customerModel.FirstName,
-                    LastName = customerModel.LastName
-                };
+                City = customerModel.City,
+                CustomerType = customerModel.CustomerType,
+                Street = customerModel.Street,
+                Postcode = customerModel.Postcode,
+                CustomerId = customerModel.CustomerId,
+                CustomerNumber = customerModel.CustomerNumber,
+                DateOfBirth = customerModel.DateOfBirth,
+                FirstName = customerModel.FirstName,
+                LastName = customerModel.LastName
+            };
 
-                //using (var carRentalDbContext = new CarRentalDbContext())
-                //{
-                // Add the newCustomerEntity to the Customers table in database
-                carRentalDbContext.Customers.Add(newCustomerEntity);
-                // Savechanges to database
-                carRentalDbContext.SaveChanges();
-                //}
-            }
-            catch { throw new ArgumentNullException(); }
+            //using (var carRentalDbContext = new CarRentalDbContext())
+            //{
+            // Add the newCustomerEntity to the Customers table in database
+            carRentalDbContext.Customers.Add(newCustomerEntity);
+            // Savechanges to database
+            carRentalDbContext.SaveChanges();
+            //}
+            //}
+            //catch { throw new ArgumentNullException(); }
         }
         /// <summary>
         /// GetCustomerByCustomerNumber by customerNumber
@@ -117,14 +117,14 @@ namespace CarRental.Services
         /// <param name="city"></param>
         public void CreateCarReservation(CustomerModel customer, DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city)
         {
-            try
-            {
-                reservationService.TakeCarReservervation(customer, requestedReservationStartDateTime, requestedReservationEndDateTime, city);
-            }
-            catch
-            {
-                throw new ArgumentNullException();
-            }
+            //try
+            //{
+            reservationService.TakeCarReservervation(customer, requestedReservationStartDateTime, requestedReservationEndDateTime, city);
+            //}
+            //catch
+            //{
+            //    throw new ArgumentNullException();
+            //}
         }
     }
 }
