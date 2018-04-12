@@ -7,38 +7,17 @@ using CarRental.Repositories;
 namespace CarRental.Services
 {
     public class CustomerService : ICustomerService, IDisposable
-    {   /// <summary>
-        /// ReservationService variable decleration
-        /// </summary>
+    {
         public ReservationService reservationService;
-        /// <summary>
-        /// Customer variable decleration
-        /// </summary>
         public Customer newCustomerEntity;
-        /// <summary>
-        /// CarRentalDbContext variable decleration
-        /// </summary>
         public CarRentalDbContext carRentalDbContext;
-        /// <summary>
-        /// CustomerModel variable decleration
-        /// </summary>
         public CustomerModel customerModel = null;
-        /// <summary>
-        /// Customer variable decleration
-        /// </summary>
         public Customer foundCustomer;
-        /// <summary>
-        /// CustomerService constructor, here we initilize the reservationService and carRentalDbContext instaces
-        /// </summary>
         public CustomerService()
         {
             reservationService = new ReservationService();
             carRentalDbContext = new CarRentalDbContext();
         }
-        /// <summary>
-        /// AddCustomer variable decleration
-        /// </summary>
-        /// <param name="customerModel"></param>
         public void AddCustomer(CustomerModel customerModel)
         {
             // try
@@ -67,11 +46,6 @@ namespace CarRental.Services
             //}
             //catch { throw new ArgumentNullException(); }
         }
-        /// <summary>
-        /// GetCustomerByCustomerNumber by customerNumber
-        /// </summary>
-        /// <param name="customerNumber"></param>
-        /// <returns></returns>
         public CustomerModel GetCustomerByCustomerNumber(string customerNumber)
         {
             //using (var carRentalDbContext = new CarRentalDbContext())
@@ -107,13 +81,6 @@ namespace CarRental.Services
 
             return customerModel;
         }
-        /// <summary>
-        /// CreateCarReservation for the particualr Customer
-        /// </summary>
-        /// <param name="customer"></param>
-        /// <param name="requestedReservationStartDateTime"></param>
-        /// <param name="requestedReservationEndDateTime"></param>
-        /// <param name="city"></param>
         public void CreateCarReservation(CustomerModel customer, DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city)
         {
             //try

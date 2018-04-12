@@ -9,7 +9,6 @@ namespace CarRental.Models
         //public const string Medium = "B";
         //public const string Large = "C";
         //public const string Luxury = "D";
-
         //public int CarId { get; set; }
         //public string CarBrand { get; set; }
         //public string LicenceNumber { get; set; }
@@ -17,11 +16,6 @@ namespace CarRental.Models
         //public string Category { get; set; }
         //public OfficeModel Office { get; set; }
         //public int OfficeId { get; set; }
-
-        /// <summary>
-        /// AddKilometers method 
-        /// </summary>
-        /// <param name="kilometersDriven"></param>
         public void AddKilometers(float kilometersDriven)
         {
             KilometerReading += kilometersDriven;

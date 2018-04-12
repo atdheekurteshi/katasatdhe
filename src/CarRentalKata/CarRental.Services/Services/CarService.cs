@@ -8,31 +8,14 @@ namespace CarRental.Services
 {
     public class CarService : ICarService
     {
-        /// <summary>
-        /// CalculatePrice variable decleration
-        /// </summary>
+
         public decimal calculatePrice = 0;
-        /// <summary>
-        /// ReservationService variable decleration
-        /// </summary>
         public ReservationService reservationService;
-        /// <summary>
-        /// AvailableCars variable decleration
-        /// </summary>
         public IEnumerable<CarModel> availableCars;
-        /// <summary>
-        /// Return variable decleration
-        /// </summary>
         public Dictionary<CarModel, decimal> result;
-        /// <summary>
-        /// CalculatePriceForAvaliableCars variable decleration
-        /// </summary>
         public CarService calculatePriceForAvaliableCars;
 
 
-        /// <summary>
-        /// CarService constructor, here we inject the reservation service instance and the result instance so we can obtain them faster.
-        /// </summary>
         public CarService()
         {
             reservationService = new ReservationService();
@@ -40,17 +23,8 @@ namespace CarRental.Services
 
         }
 
-        /// <summary>
-        /// Finding all avaliable cars for rental form a particualr city like city="Wien"
-        /// </summary>
-        /// <param name="customer"></param>
-        /// <param name="requestedReservationStartDateTime"></param>
-        /// <param name="requestedReservationEndDateTime"></param>
-        /// <param name="city"></param>
-        /// <returns></returns>
         public Dictionary<CarModel, decimal> FindAvailableCarsForRental(CustomerModel customer, DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city)
         {
-            // Declear calculatePriceForAvaliableCars 
             calculatePriceForAvaliableCars = new CarService();
             // Call calculatePriceForAvaliableCars.CalculatePriceForAvaliableCarsForRental
             //try
@@ -61,24 +35,15 @@ namespace CarRental.Services
             //{
             //    throw new ArgumentNullException();
             //}
-            // Return CalculatePriceForAvaliableCarsForRental.Results
             return calculatePriceForAvaliableCars.result.Count > 0 ? calculatePriceForAvaliableCars.result : null;
         }
-        /// <summary>
-        /// Calculating the price for the rental avaliable cars form a particualr city like city="Wien"
-        /// </summary>
-        /// <param name="customer"></param>
-        /// <param name="requestedReservationStartDateTime"></param>
-        /// <param name="requestedReservationEndDateTime"></param>
-        /// <param name="city"></param>
+
         public void CalculatePriceForAvaliableCarsForRental(CustomerModel customer, DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city)
         {
-            // Reserve all avaliablecarse peer requestedReservationStartDateTime and requestedReservationEndDateTime and city
+
             //try
             //{
             availableCars = reservationService.FindAvailableCars(requestedReservationStartDateTime, requestedReservationEndDateTime, city);
-
-            // Query through availableCars and select them based on CustomerType
             foreach (var availableCar in availableCars)
             {
                 switch (availableCar.Category)
@@ -101,7 +66,6 @@ namespace CarRental.Services
                             break;
                         }
                 }
-                // Return the calulcated price for the avaliable cars
                 result.Add(availableCar, calculatePrice);
             }
             // }

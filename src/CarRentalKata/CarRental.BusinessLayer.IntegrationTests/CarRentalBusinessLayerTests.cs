@@ -11,26 +11,13 @@
 
     public class CarRentalBusinessLayerTests : IDisposable
     {
-        /// <summary>
-        /// CustomersLastNameToBeDeleted variable declered and initilized
-        /// </summary>
         private const string CustomersLastNameToBeDeleted = "FC5EC369-1CDB-4A6E-B0D0-9D3E89ADFE6C";
-        /// <summary>
-        /// CustomerLastName variable declered and initilized
-        /// </summary>
         private const string customerLastName = CustomersLastNameToBeDeleted;
-        /// <summary>
-        /// Fixture variable declered and initilized
-        /// </summary>
         private readonly Fixture _autoFixture = new Fixture();
-        /// <summary>
-        /// Dispose the TestCleanup
-        /// </summary>
         public void Dispose()
         {
             TestCleanup();
         }
-
         [Fact]
         public void TestCleanup()
         {
@@ -292,8 +279,6 @@
             var expectedResult = 1440.0m;
             foreach (var price in actualResult) { Assert.True(price == expectedResult); }
         }
-
-
         [Fact]
         public void NewCustomerIs_Created()
         {
@@ -311,5 +296,19 @@
             using (var carRentalDbContext = new CarRentalDbContext()) { actualResult = carRentalDbContext.Customers.SingleOrDefault(c => c.LastName == customerLastName); }
             Assert.True(actualResult != null && expectedResult.LastName == actualResult.LastName);
         }
+        //[Fact]
+        //public void CarModel_CarConusmer_Small()
+        //{
+        //    //Arrange
+        //    var systemUnderTest = new CarService();
+        //    CarService result;
+        //    var customerTypeId = 1;
+        //    var outPutValue = 0.02m;
+        //    //Act
+        //    systemUnderTest.carModelConsumer(customerTypeId, outPutValue);
+        //    //Assert
+        //    var exceptedResult = true;
+        //    Assert.True(exceptedResult,CarModel.Small);
+        //}
     }
 }

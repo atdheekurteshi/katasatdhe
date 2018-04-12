@@ -7,9 +7,6 @@ namespace CarRental.Repositories
 
     public class CarRentalDbContext : DbContext
     {
-        /// <summary>
-        /// CarRentalDbContext constructor
-        /// </summary>
         public CarRentalDbContext() : base(ApplicationSettings.CarRentalDbConnectionStringName)
         {
             Database.SetInitializer(new CarRentalDbInitializer());

@@ -9,30 +9,12 @@ namespace CarRental.Services
 {
     public class ReservationService : IReservationService,IDisposable
     {
-        /// <summary>
-        /// CarRentalDbContext variable decleration
-        /// </summary>
         public CarRentalDbContext carRentalDbContext;
-        /// <summary>
-        /// ResultAvailableCars variable decleration
-        /// </summary>
         public IEnumerable<CarModel> resultAvailableCars;
-        /// <summary>
-        /// ReservationService constructor, here we inject the car rental db context
-        /// </summary>
         public ReservationService()
         {
-
             carRentalDbContext = new CarRentalDbContext();
-
         }
-        /// <summary>
-        /// FindAvailableCars from a CarModel
-        /// </summary>
-        /// <param name="requestedReservationStartDateTime"></param>
-        /// <param name="requestedReservationEndDateTime"></param>
-        /// <param name="cityForRequestedReservation"></param>
-        /// <returns></returns>
         [Description("FindAvailableCars")]
         public IEnumerable<CarModel> FindAvailableCars(DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string cityForRequestedReservation)
         {
@@ -74,14 +56,6 @@ namespace CarRental.Services
             return resultAvailableCars;
             //}
         }
-
-        /// <summary>
-        /// Make car reservervation from a particualr customer
-        /// </summary>
-        /// <param name="customer"></param>
-        /// <param name="requestedReservationStartDateTime"></param>
-        /// <param name="requestedReservationEndDateTime"></param>
-        /// <param name="city"></param>
         public void TakeCarReservervation(CustomerModel customer, DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city)
         {
             throw new NotImplementedException();
