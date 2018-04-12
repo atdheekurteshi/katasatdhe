@@ -311,19 +311,5 @@
             using (var carRentalDbContext = new CarRentalDbContext()) { actualResult = carRentalDbContext.Customers.SingleOrDefault(c => c.LastName == customerLastName); }
             Assert.True(actualResult != null && expectedResult.LastName == actualResult.LastName);
         }
-        //[Fact]
-        //public void CarModel_CarConusmer_Small()
-        //{
-        //    //Arrange
-        //    var systemUnderTest = new CarService();
-        //    CarService result;
-        //    var customerTypeId = 1;
-        //    var outPutValue = 0.02m;
-        //    //Act
-        //    systemUnderTest.carModelConsumer(customerTypeId, outPutValue);
-        //    //Assert
-        //    var exceptedResult = true;
-        //    Assert.True(exceptedResult,CarModel.Small);
-        //}
     }
 }
