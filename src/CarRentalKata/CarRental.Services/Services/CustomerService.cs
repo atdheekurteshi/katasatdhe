@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using CarRental.Entities;
 using CarRental.Models;
@@ -7,7 +6,7 @@ using CarRental.Repositories;
 
 namespace CarRental.Services
 {
-    public class CustomerService : ICustomerService
+    public class CustomerService : ICustomerService, IDisposable
     {   /// <summary>
         /// ReservationService variable decleration
         /// </summary>
@@ -125,6 +124,10 @@ namespace CarRental.Services
             //{
             //    throw new ArgumentNullException();
             //}
+        }
+        public void Dispose()
+        {
+            ((IDisposable)carRentalDbContext).Dispose();
         }
     }
 }

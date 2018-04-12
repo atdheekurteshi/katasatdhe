@@ -255,33 +255,33 @@
             Assert.False(actualResult.Keys.Any(expectedResult));
         }
         [Fact]
-        public void CarPriceOfCarTypeB_IsCorrectCalculated_ForCustomerOfType_Consumer()
+        public void CarPriceOfCarTypeA_IsCorrectCalculated_ForCustomerOfType_Consumer()
         {
             //Arrange
             var systemUnderTest = new CarService();
-            var requestedReservationStart = new DateTime(2014, 09, 22, 8, 0, 0);
-            var requestedReservationEnd = new DateTime(2014, 09, 25, 8, 0, 0);
+            var requestedReservationStart = new DateTime(2014, 01, 29, 8, 0, 0);
+            var requestedReservationEnd = new DateTime(2014, 01, 30, 8, 0, 0);
             var customerOfTypeConsumerDoSearch = _autoFixture.Build<CustomerModel>().With(property => property.CustomerType, CustomerModel.Consumer).Create();
-            const string cityToSearchFor = "Wien";
+            const string cityToSearchFor = "Berlin";
 
             //Act
             var actualResult = systemUnderTest.FindAvailableCarsForRental(customerOfTypeConsumerDoSearch, requestedReservationStart, requestedReservationEnd, cityToSearchFor)
-                                              .Where(availableCar => availableCar.Key.Category == CarModel.Medium).Select(result => result.Value);
+                                              .Where(availableCar => availableCar.Key.Category == CarModel.Large).Select(result => result.Value);
 
             //Assert
-            var expectedResult = 195.0m;
+            var expectedResult = 540.0m;
             foreach (var price in actualResult) { Assert.True(price == expectedResult); }
         }
 
         [Fact]
-        public void CarPriceOfCarTypeD_IsCorrectCalculated_ForCustomerOfType_Consumer()
+        public void CarPriceOfCarTypeD_IsCorrectCalculated_ForCustomerOfType_BusinessPremium()
         {
             //Arrange
             var systemUnderTest = new CarService();
             var carModel = new CarModel();
             var requestedReservationStart = new DateTime(2015, 03, 31, 8, 0, 0);
             var requestedReservationEnd = new DateTime(2015, 04, 01, 8, 0, 0);
-            var customerOfTypeConsumerDoSearch = _autoFixture.Build<CustomerModel>().With(property => property.CustomerType, CustomerModel.Consumer).Create();
+            var customerOfTypeConsumerDoSearch = _autoFixture.Build<CustomerModel>().With(property => property.CustomerType, CustomerModel.BusinessPremium).Create();
             const string cityToSearchFor = "München";
 
             //Act
@@ -311,5 +311,19 @@
             using (var carRentalDbContext = new CarRentalDbContext()) { actualResult = carRentalDbContext.Customers.SingleOrDefault(c => c.LastName == customerLastName); }
             Assert.True(actualResult != null && expectedResult.LastName == actualResult.LastName);
         }
+        //[Fact]
+        //public void CarModel_CarConusmer_Small()
+        //{
+        //    //Arrange
+        //    var systemUnderTest = new CarService();
+        //    CarService result;
+        //    var customerTypeId = 1;
+        //    var outPutValue = 0.02m;
+        //    //Act
+        //    systemUnderTest.carModelConsumer(customerTypeId, outPutValue);
+        //    //Assert
+        //    var exceptedResult = true;
+        //    Assert.True(exceptedResult,CarModel.Small);
+        //}
     }
 }

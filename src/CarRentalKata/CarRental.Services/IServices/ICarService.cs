@@ -26,5 +26,17 @@ namespace CarRental.Services
         /// <param name="city"></param>
         /// <returns></returns>
         Dictionary<CarModel, decimal> FindAvailableCarsForRental(CustomerModel customer, DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city);
+        /// <summary>
+        /// CarModelCategory method declaration
+        /// </summary>
+        /// <param name="customerTypeId"></param>
+        /// <param name="outPutValue"></param>
+        void carModelConsumer(int customerTypeId, decimal outPutValue);
+        /// <summary>
+        /// CarConsumerCategory method declaration
+        /// </summary>
+        /// <param name="requestedReservationStartDateTime"></param>
+        /// <param name="requestedReservationEndDateTime"></param>
+        void carConsumerCategory(DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime);
     }
 }

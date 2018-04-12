@@ -113,6 +113,10 @@
       <Project>{63be2a89-8c7f-4e04-81a2-88aaa0697b35}</Project>
       <Name>CarRental.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CarRental.Repositories\CarRental.Repositories.csproj">
+      <Project>{bc0feffb-8d93-4174-8846-04e64ecd635b}</Project>
+      <Name>CarRental.Repositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CarRental.Services\CarRental.Services.csproj">
       <Project>{591FCD3B-4A31-487F-B62D-1F12C71C4157}</Project>
       <Name>CarRental.Services</Name>

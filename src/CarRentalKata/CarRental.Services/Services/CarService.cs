@@ -41,136 +41,6 @@ namespace CarRental.Services
         }
 
         /// <summary>
-        /// Calculating the price for the rental avaliable cars form a particualr city like city="Wien"
-        /// </summary>
-        /// <param name="customer"></param>
-        /// <param name="requestedReservationStartDateTime"></param>
-        /// <param name="requestedReservationEndDateTime"></param>
-        /// <param name="city"></param>
-        public void CalculatePriceForAvaliableCarsForRental(CustomerModel customer, DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city)
-        {
-            // Reserve all avaliablecarse peer requestedReservationStartDateTime and requestedReservationEndDateTime and city
-            //try
-            //{
-                availableCars = reservationService.FindAvailableCars(requestedReservationStartDateTime, requestedReservationEndDateTime, city);
-
-                // Query through availableCars and select them based on CustomerType
-                foreach (var availableCar in availableCars)
-                {
-                    switch (availableCar.Category)
-                    {
-                        case CarModel.Small:
-                            {
-                                calculatePrice = 50 * (requestedReservationEndDateTime - requestedReservationStartDateTime).Days;
-
-                                switch (customer.CustomerType)
-                                {
-                                    case CustomerModel.ConsumerPremium:
-                                        {
-                                            calculatePrice = calculatePrice - (calculatePrice * 0.02m);
-                                            break;
-                                        }
-                                }
-
-                                break;
-                            }
-
-                        case CarModel.Medium:
-                            {
-                                calculatePrice = 65 * (requestedReservationEndDateTime - requestedReservationStartDateTime).Days;
-
-                                switch (customer.CustomerType)
-                                {
-                                    case CustomerModel.ConsumerPremium:
-                                        {
-                                            calculatePrice = calculatePrice - (calculatePrice * 0.03m);
-                                            break;
-                                        }
-
-                                    case CustomerModel.BusinessPremium:
-                                        {
-                                            calculatePrice = calculatePrice - (calculatePrice * 0.04m);
-                                            break;
-                                        }
-                                }
-
-                                break;
-                            }
-
-                        case CarModel.Large:
-                            {
-                                calculatePrice = 90 * (requestedReservationEndDateTime - requestedReservationStartDateTime).Days;
-
-                                switch (customer.CustomerType)
-                                {
-                                    case CustomerModel.ConsumerPremium:
-                                        {
-                                            calculatePrice = calculatePrice - (calculatePrice * 0.05m);
-                                            break;
-                                        }
-
-                                    case CustomerModel.Business:
-                                        {
-                                            calculatePrice = calculatePrice - (calculatePrice * 0.06m);
-                                            break;
-                                        }
-
-                                    case CustomerModel.BusinessPremium:
-                                        {
-                                            calculatePrice = calculatePrice - (calculatePrice * 0.08m);
-                                            break;
-                                        }
-                                }
-
-                                break;
-                            }
-
-                        case CarModel.Luxury:
-                            {
-                                calculatePrice = 120 * (requestedReservationEndDateTime - requestedReservationStartDateTime).Days;
-
-                                switch (customer.CustomerType)
-                                {
-                                    case CustomerModel.ConsumerPremium:
-                                        {
-                                            calculatePrice = calculatePrice - (calculatePrice * 0.06m);
-                                            break;
-                                        }
-
-                                    case CustomerModel.Business:
-                                        {
-                                            calculatePrice = calculatePrice - (calculatePrice * 0.08m);
-                                            break;
-                                        }
-
-                                    case CustomerModel.BusinessPremium:
-                                        {
-                                            calculatePrice = calculatePrice - (calculatePrice * 0.12m);
-                                            break;
-                                        }
-                                }
-
-                                break;
-                            }
-
-                        default:
-                            {
-                                calculatePrice = 0;
-                                break;
-                            }
-                    }
-                    // Return the calulcated price for the avaliable cars
-                    result.Add(availableCar, calculatePrice);
-                }
-           // }
-            //catch
-            //{
-            //    throw new ArgumentNullException();
-            //}
-
-        }
-
-        /// <summary>
         /// Finding all avaliable cars for rental form a particualr city like city="Wien"
         /// </summary>
         /// <param name="customer"></param>
@@ -183,16 +53,118 @@ namespace CarRental.Services
             // Declear calculatePriceForAvaliableCars 
             calculatePriceForAvaliableCars = new CarService();
             // Call calculatePriceForAvaliableCars.CalculatePriceForAvaliableCarsForRental
-           //try
-           // {
-                calculatePriceForAvaliableCars.CalculatePriceForAvaliableCarsForRental(customer, requestedReservationStartDateTime, requestedReservationEndDateTime, city);
-           // }
+            //try
+            // {
+            calculatePriceForAvaliableCars.CalculatePriceForAvaliableCarsForRental(customer, requestedReservationStartDateTime, requestedReservationEndDateTime, city);
+            // }
             //catch
             //{
             //    throw new ArgumentNullException();
             //}
             // Return CalculatePriceForAvaliableCarsForRental.Results
             return calculatePriceForAvaliableCars.result.Count > 0 ? calculatePriceForAvaliableCars.result : null;
+        }
+        /// <summary>
+        /// Calculating the price for the rental avaliable cars form a particualr city like city="Wien"
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <param name="requestedReservationStartDateTime"></param>
+        /// <param name="requestedReservationEndDateTime"></param>
+        /// <param name="city"></param>
+        public void CalculatePriceForAvaliableCarsForRental(CustomerModel customer, DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city)
+        {
+            // Reserve all avaliablecarse peer requestedReservationStartDateTime and requestedReservationEndDateTime and city
+            //try
+            //{
+            availableCars = reservationService.FindAvailableCars(requestedReservationStartDateTime, requestedReservationEndDateTime, city);
+
+            // Query through availableCars and select them based on CustomerType
+            foreach (var availableCar in availableCars)
+            {
+                switch (availableCar.Category)
+                {
+                    case CarModel.Small:
+                        carConsumerCategory(requestedReservationStartDateTime, requestedReservationEndDateTime);
+                        break;
+                    case CarModel.Medium:
+                        carConsumerCategory(requestedReservationStartDateTime, requestedReservationEndDateTime);
+                        break;
+                    case CarModel.Large:
+                        carConsumerCategory(requestedReservationStartDateTime, requestedReservationEndDateTime);
+                        break;
+                    case CarModel.Luxury:
+                        carConsumerCategory(requestedReservationStartDateTime, requestedReservationEndDateTime);
+                        break;
+                    default:
+                        {
+                            calculatePrice = 0;
+                            break;
+                        }
+                }
+                // Return the calulcated price for the avaliable cars
+                result.Add(availableCar, calculatePrice);
+            }
+            // }
+            //catch
+            //{
+            //    throw new ArgumentNullException();
+            //}
+
+        }
+
+        public void carModelConsumer(int customerTypeId, decimal outPutValue)
+        {
+            Dictionary<int, decimal> accounts = new Dictionary<int, decimal>();
+
+            accounts.Add(CustomerModel.Consumer, 1);
+            accounts.Add(CustomerModel.ConsumerPremium, 2);
+            accounts.Add(CustomerModel.Business, 3);
+            accounts.Add(CustomerModel.BusinessPremium, 4);
+
+            if (accounts.ContainsKey(customerTypeId))
+            {
+                calculatePrice = calculatePrice - (calculatePrice * outPutValue);
+            }
+        }
+        public void carConsumerCategory(DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime)
+        {
+
+            Dictionary<string, string> carModels = new Dictionary<string, string>();
+
+            carModels.Add(CarModel.Small, "A");
+            carModels.Add(CarModel.Medium, "B");
+            carModels.Add(CarModel.Large, "C");
+            carModels.Add(CarModel.Luxury, "D");
+
+            if (carModels.ContainsKey(CarModel.Small))
+            {
+                calculatePrice = 50 * (requestedReservationEndDateTime - requestedReservationStartDateTime).Days;
+                carModelConsumer(2, 0.02m);
+            }
+            else if (carModels.ContainsKey(CarModel.Medium))
+            {
+                calculatePrice = 65 * (requestedReservationEndDateTime - requestedReservationStartDateTime).Days;
+                carModelConsumer(2, 0.03m);
+                carModelConsumer(4, 0.04m);
+            }
+            else if (carModels.ContainsKey(CarModel.Large))
+            {
+                calculatePrice = 90 * (requestedReservationEndDateTime - requestedReservationStartDateTime).Days;
+                carModelConsumer(2, 0.05m);
+                carModelConsumer(3, 0.03m);
+                carModelConsumer(4, 0.08m);
+            }
+            else if (carModels.ContainsKey(CarModel.Luxury))
+            {
+                calculatePrice = 120 * (requestedReservationEndDateTime - requestedReservationStartDateTime).Days;
+                carModelConsumer(2, 0.06m);
+                carModelConsumer(3, 0.08m);
+                carModelConsumer(4, 0.12m);
+            }
+            else
+            {
+                throw new ArgumentNullException();
+            }
         }
     }
 }

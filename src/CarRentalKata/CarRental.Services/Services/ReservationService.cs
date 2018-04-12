@@ -7,7 +7,7 @@ using CarRental.Repositories;
 using CarRental.Services;
 namespace CarRental.Services
 {
-    public class ReservationService : IReservationService
+    public class ReservationService : IReservationService,IDisposable
     {
         /// <summary>
         /// CarRentalDbContext variable decleration
@@ -45,25 +45,25 @@ namespace CarRental.Services
 
             var availableCars = carRentalDbContext.Cars.Where(car =>
                                                                       !idsOfCarsNotAvailableNow.Contains(car.CarId) && car.Office.City == cityForRequestedReservation);
-           // try
+            // try
             //{
-                resultAvailableCars = availableCars.Select(availableCar => new CarModel
+            resultAvailableCars = availableCars.Select(availableCar => new CarModel
+            {
+                CarId = availableCar.CarId,
+                Category = availableCar.Category,
+                CarBrand = availableCar.CarBrand,
+                KilometerReading = availableCar.KilometerReading,
+                LicenceNumber = availableCar.LicenceNumber,
+                OfficeId = availableCar.OfficeId,
+                Office = new OfficeModel
                 {
-                    CarId = availableCar.CarId,
-                    Category = availableCar.Category,
-                    CarBrand = availableCar.CarBrand,
-                    KilometerReading = availableCar.KilometerReading,
-                    LicenceNumber = availableCar.LicenceNumber,
-                    OfficeId = availableCar.OfficeId,
-                    Office = new OfficeModel
-                    {
-                        City = availableCar.Office.City,
-                        Country = availableCar.Office.Country,
-                        OfficeId = availableCar.Office.OfficeId,
-                        Postcode = availableCar.Office.Postcode,
-                        Street = availableCar.Office.Street
-                    }
-                }).ToList();
+                    City = availableCar.Office.City,
+                    Country = availableCar.Office.Country,
+                    OfficeId = availableCar.Office.OfficeId,
+                    Postcode = availableCar.Office.Postcode,
+                    Street = availableCar.Office.Street
+                }
+            }).ToList();
             //}
             //catch
             //{
@@ -74,7 +74,7 @@ namespace CarRental.Services
             return resultAvailableCars;
             //}
         }
-        
+
         /// <summary>
         /// Make car reservervation from a particualr customer
         /// </summary>
@@ -85,6 +85,11 @@ namespace CarRental.Services
         public void TakeCarReservervation(CustomerModel customer, DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city)
         {
             throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            ((IDisposable)carRentalDbContext).Dispose();
         }
     }
 }

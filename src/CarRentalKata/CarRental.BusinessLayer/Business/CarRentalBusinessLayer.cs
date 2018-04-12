@@ -6,6 +6,7 @@ namespace CarRental.BusinessLayer
 {
     public class CarRentalBusinessLayer
     {
+
         /// <summary>
         /// CustomerService variable declaration
         /// </summary>
