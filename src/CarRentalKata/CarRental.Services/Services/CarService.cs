@@ -26,53 +26,52 @@ namespace CarRental.Services
         public Dictionary<CarModel, decimal> FindAvailableCarsForRental(CustomerModel customer, DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city)
         {
             calculatePriceForAvaliableCars = new CarService();
-            // Call calculatePriceForAvaliableCars.CalculatePriceForAvaliableCarsForRental
-            //try
-            // {
-            calculatePriceForAvaliableCars.CalculatePriceForAvaliableCarsForRental(customer, requestedReservationStartDateTime, requestedReservationEndDateTime, city);
-            // }
-            //catch
-            //{
-            //    throw new ArgumentNullException();
-            //}
+            try
+            {
+                calculatePriceForAvaliableCars.CalculatePriceForAvaliableCarsForRental(customer, requestedReservationStartDateTime, requestedReservationEndDateTime, city);
+            }
+            catch
+            {
+                throw new ArgumentNullException();
+            }
             return calculatePriceForAvaliableCars.result.Count > 0 ? calculatePriceForAvaliableCars.result : null;
         }
 
         public void CalculatePriceForAvaliableCarsForRental(CustomerModel customer, DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city)
         {
 
-            //try
-            //{
-            availableCars = reservationService.FindAvailableCars(requestedReservationStartDateTime, requestedReservationEndDateTime, city);
-            foreach (var availableCar in availableCars)
+            try
             {
-                switch (availableCar.Category)
+                availableCars = reservationService.FindAvailableCars(requestedReservationStartDateTime, requestedReservationEndDateTime, city);
+                foreach (var availableCar in availableCars)
                 {
-                    case CarModel.Small:
-                        carConsumerCategory(requestedReservationStartDateTime, requestedReservationEndDateTime);
-                        break;
-                    case CarModel.Medium:
-                        carConsumerCategory(requestedReservationStartDateTime, requestedReservationEndDateTime);
-                        break;
-                    case CarModel.Large:
-                        carConsumerCategory(requestedReservationStartDateTime, requestedReservationEndDateTime);
-                        break;
-                    case CarModel.Luxury:
-                        carConsumerCategory(requestedReservationStartDateTime, requestedReservationEndDateTime);
-                        break;
-                    default:
-                        {
-                            calculatePrice = 0;
+                    switch (availableCar.Category)
+                    {
+                        case CarModel.Small:
+                            carConsumerCategory(requestedReservationStartDateTime, requestedReservationEndDateTime);
                             break;
-                        }
+                        case CarModel.Medium:
+                            carConsumerCategory(requestedReservationStartDateTime, requestedReservationEndDateTime);
+                            break;
+                        case CarModel.Large:
+                            carConsumerCategory(requestedReservationStartDateTime, requestedReservationEndDateTime);
+                            break;
+                        case CarModel.Luxury:
+                            carConsumerCategory(requestedReservationStartDateTime, requestedReservationEndDateTime);
+                            break;
+                        default:
+                            {
+                                calculatePrice = 0;
+                                break;
+                            }
+                    }
+                    result.Add(availableCar, calculatePrice);
                 }
-                result.Add(availableCar, calculatePrice);
             }
-            // }
-            //catch
-            //{
-            //    throw new ArgumentNullException();
-            //}
+            catch
+            {
+                throw new ArgumentNullException();
+            }
 
         }
 
