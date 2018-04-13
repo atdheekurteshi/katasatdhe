@@ -38,7 +38,10 @@ namespace CarRental.Services
                 carRentalDbContext.Customers.Add(newCustomerEntity);
                 carRentalDbContext.SaveChanges();
             }
-            catch { throw new ArgumentNullException(); }
+            catch
+            {
+                throw new Exception();
+            }
         }
         public CustomerModel GetCustomerByCustomerNumber(string customerNumber)
         {
@@ -61,7 +64,6 @@ namespace CarRental.Services
                         FirstName = foundCustomer.FirstName
                     };
                 }
-
             }
             catch
             {

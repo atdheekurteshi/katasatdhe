@@ -10,7 +10,7 @@ namespace CarRental.Services
     public class ReservationService : IReservationService, IDisposable
     {
         public CarRentalDbContext carRentalDbContext;
-        public IEnumerable<CarModel> resultAvailableCars;
+        public IEnumerable<CarModel> resultOfAvailableCars;
         public ReservationService()
         {
             carRentalDbContext = new CarRentalDbContext();
@@ -27,7 +27,7 @@ namespace CarRental.Services
                                                                       !idsOfCarsNotAvailableNow.Contains(car.CarId) && car.Office.City == cityForRequestedReservation);
             try
             {
-                resultAvailableCars = availableCars.Select(availableCar => new CarModel
+                resultOfAvailableCars = availableCars.Select(availableCar => new CarModel
                 {
                     CarId = availableCar.CarId,
                     Category = availableCar.Category,
@@ -47,16 +47,15 @@ namespace CarRental.Services
             }
             catch
             {
-                throw new ArgumentNullException();
+                throw new Exception();
             }
 
-            return resultAvailableCars;
+            return resultOfAvailableCars;
         }
         public void TakeCarReservervation(CustomerModel customer, DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city)
         {
             throw new NotImplementedException();
         }
-
         public void Dispose()
         {
             ((IDisposable)carRentalDbContext).Dispose();

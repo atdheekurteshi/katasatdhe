@@ -6,8 +6,6 @@ namespace CarRental.BusinessLayer
 {
     public class CarRentalBusinessLayer
     {
-
-       
         public CustomerService customerService;
         public CustomerModel newCustomer;
         public CarRentalBusinessLayer()
@@ -27,6 +25,7 @@ namespace CarRental.BusinessLayer
                 Street = customer.Street,
                 Postcode = customer.Postcode
             };
+
             customerService.AddCustomer(newCustomer);
         }
     }

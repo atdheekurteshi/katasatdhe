@@ -10,71 +10,33 @@ namespace CarRental.Services
     {
 
         public decimal calculatePrice = 0;
-        public ReservationService reservationService;
-        public IEnumerable<CarModel> availableCars;
-        public Dictionary<CarModel, decimal> result;
-        public CarService calculatePriceForAvaliableCars;
-
+        private readonly ReservationService reservationService;
+        private readonly IEnumerable<CarModel> availableCars;
+        private readonly Dictionary<CarModel, decimal> result;
+        private readonly CarService calculatePriceForAvaliableCars = new CarService();
 
         public CarService()
         {
             reservationService = new ReservationService();
             result = new Dictionary<CarModel, decimal>();
-
         }
-
         public Dictionary<CarModel, decimal> FindAvailableCarsForRental(CustomerModel customer, DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city)
         {
-            calculatePriceForAvaliableCars = new CarService();
             try
             {
                 calculatePriceForAvaliableCars.CalculatePriceForAvaliableCarsForRental(customer, requestedReservationStartDateTime, requestedReservationEndDateTime, city);
             }
             catch
             {
-                throw new ArgumentNullException();
+                throw new Exception();
             }
             return calculatePriceForAvaliableCars.result.Count > 0 ? calculatePriceForAvaliableCars.result : null;
         }
 
         public void CalculatePriceForAvaliableCarsForRental(CustomerModel customer, DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city)
         {
-
-            try
-            {
-                availableCars = reservationService.FindAvailableCars(requestedReservationStartDateTime, requestedReservationEndDateTime, city);
-                foreach (var availableCar in availableCars)
-                {
-                    switch (availableCar.Category)
-                    {
-                        case CarModel.Small:
-                            carConsumerCategory(requestedReservationStartDateTime, requestedReservationEndDateTime);
-                            break;
-                        case CarModel.Medium:
-                            carConsumerCategory(requestedReservationStartDateTime, requestedReservationEndDateTime);
-                            break;
-                        case CarModel.Large:
-                            carConsumerCategory(requestedReservationStartDateTime, requestedReservationEndDateTime);
-                            break;
-                        case CarModel.Luxury:
-                            carConsumerCategory(requestedReservationStartDateTime, requestedReservationEndDateTime);
-                            break;
-                        default:
-                            {
-                                calculatePrice = 0;
-                                break;
-                            }
-                    }
-                    result.Add(availableCar, calculatePrice);
-                }
-            }
-            catch
-            {
-                throw new ArgumentNullException();
-            }
-
+            returnAvaliableCars(requestedReservationStartDateTime, requestedReservationEndDateTime, city);
         }
-
         public void carModelConsumer(int customerTypeId, decimal outPutValue)
         {
             Dictionary<int, decimal> accounts = new Dictionary<int, decimal>();
@@ -126,7 +88,37 @@ namespace CarRental.Services
             }
             else
             {
-                throw new ArgumentNullException();
+                throw new Exception();
+            }
+        }
+
+        public void returnAvaliableCars(DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city)
+        {
+            availableCars = reservationService.FindAvailableCars(requestedReservationStartDateTime, requestedReservationEndDateTime, city);
+
+            foreach (var availableCar in availableCars)
+            {
+                if (availableCar.Category == CarModel.Small)
+                {
+                    carConsumerCategory(requestedReservationStartDateTime, requestedReservationEndDateTime);
+                }
+                else if (availableCar.Category == CarModel.Medium)
+                {
+                    carConsumerCategory(requestedReservationStartDateTime, requestedReservationEndDateTime);
+                }
+                else if (availableCar.Category == CarModel.Large)
+                {
+                    carConsumerCategory(requestedReservationStartDateTime, requestedReservationEndDateTime);
+                }
+                else if (availableCar.Category == CarModel.Luxury)
+                {
+                    carConsumerCategory(requestedReservationStartDateTime, requestedReservationEndDateTime);
+                }
+                else
+                {
+                    calculatePrice = 0;
+                }
+                result.Add(availableCar, calculatePrice);
             }
         }
     }

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using CarRental.Entities;
 using CarRental.Models;
-using CarRental.Services;
-using CarRental.Repositories;
 
 namespace CarRental.Services
 {

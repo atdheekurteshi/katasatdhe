@@ -101,8 +101,6 @@
             var expectedResult = 3;
 
             Assert.True(actualResult.Count == expectedResult);
-
-
         }
 
         [Fact]
