@@ -9,7 +9,7 @@ namespace CarRental.Services
     public class CarService : ICarService
     {
 
-        public decimal calculatePrice = 1;
+        public decimal calculatePrice = 0;
         public ReservationService reservationService;
         public IEnumerable<CarModel> availableCars;
         public Dictionary<CarModel, decimal> result;
