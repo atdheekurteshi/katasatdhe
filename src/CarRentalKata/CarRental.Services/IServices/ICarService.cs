@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using CarRental.Models;
+using CarRental.Entities;
 
 namespace CarRental.Services
 {
     public interface ICarService
     {
-        void CalculatePriceForAvaliableCarsForRental(CustomerModel customer, DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city);
-      
-        Dictionary<CarModel, decimal> FindAvailableCarsForRental(CustomerModel customer, DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city);
+        void CalculatePriceForAvaliableCarsForRental(DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city);
+
+        IEnumerable<Car> FindAvailableCarsForRental(DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city);
        
-        void carModelConsumer(int customerTypeId, decimal outPutValue);
+        void CarModelConsumer(int customerTypeId, decimal outPutValue);
      
-        void carConsumerCategory(DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime);
+        void CarConsumerCategory(DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime);
     }
 }

@@ -1,88 +1,91 @@
-﻿namespace CarRental.BusinessLayer.IntegrationTests
+﻿using System;
+using System.Linq;
+using CarRental.Services;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using AutoFixture;
+using CarRental.Repositories.IDBContext;
+using CarRental.Entities;
+using Xunit;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
+
+namespace CarRental.BusinessLayer.Test
 {
-    using System;
-    using System.Linq;
-    using AutoFixture;
-    using Entities;
-    using Repositories;
-    using Xunit;
-    using CarRental.Services;
-
-    public class CarRentalBusinessLayerTests : IDisposable
+    [TestClass]
+    public class CarRentalAvaliableCarsTest : ICarRentalDbContext
     {
-        private const string CustomersLastNameToBeDeleted = "FC5EC369-1CDB-4A6E-B0D0-9D3E89ADFE6C";
-        private const string customerLastName = CustomersLastNameToBeDeleted;
         private readonly Fixture _autoFixture = new Fixture();
-        public void Dispose()
-        {
-             
-            //TestCleanup();
-        }
+        public ICarService iCarservice;
 
-        [Fact]
-        public void TestCleanup()
+        [TestMethod]
+        public void SearchInVienna_Returns2Cars()
         {
-            using (var carRentalDbContext = new CarRentalDbContext())
+            //Arrange
+            var mockSystemUnderCustomerObject = _autoFixture.Create<Customer>();
+            var mockSystemUnderObject = new CarService();
+            var requestedReservationStart = new DateTime(2014, 09, 22, 8, 0, 0);
+            var requestedReservationEnd = new DateTime(2014, 09, 25, 8, 0, 0);
+            //var anonymousCustomerDoSearch = _autoFixture.Create<Customer>();
+            var cityToSearchFor = "Wien";
+            var mockSystemUnderTestObject = mockSystemUnderObject.FindAvailableCarsForRental(
+                requestedReservationStart, requestedReservationEnd, cityToSearchFor);
+
+            //Act
+            var actualResult = mockSystemUnderTestObject;
+
+            //Assert
+            var expectedResult = 2;
+            foreach (var item in actualResult)
             {
-                var customerToBeDeleted = carRentalDbContext.Customers.SingleOrDefault(c => c.LastName == CustomersLastNameToBeDeleted);
-                if (customerToBeDeleted != null)
-                {
-                    carRentalDbContext.Customers.Remove(customerToBeDeleted);
-                    carRentalDbContext.SaveChanges();
-                }
+                Assert.IsTrue(item.OfficeId == expectedResult);
             }
         }
 
-        //[Fact]
-        //public void SearchInVienna_Returns2Cars()
-        //{
-        //    //Arrange
-        //    var systemUnderTest = new CarService();
-        //    var requestedReservationStart = new DateTime(2014, 09, 22, 8, 0, 0);
-        //    var requestedReservationEnd = new DateTime(2014, 09, 25, 8, 0, 0);
-        //    var anonymousCustomerDoSearch = _autoFixture.Create<Customer>();
-        //    const string cityToSearchFor = "Wien";
-
-        //    //Act
-        //    var actualResult = systemUnderTest.FindAvailableCarsForRental(anonymousCustomerDoSearch, requestedReservationStart, requestedReservationEnd, cityToSearchFor);
-
-        //    //Assert
-        //    var expectedResult = 2;
-        //    Assert.True(actualResult.Count == expectedResult);
-        //}
-        //[Fact]
+        //[TestMethod]
         //public void SearchInBerlin_Returns3Cars()
         //{
         //    //Arrange
-        //    var systemUnderTest = new CarService();
+
+        //    var mockSystemUnderObject = new Mock<ICarService>();
+        //    var mockSystemUnderTestObject = mockSystemUnderObject.Object;
         //    var requestedReservationStart = new DateTime(2013, 12, 29, 8, 0, 0);
         //    var requestedReservationEnd = new DateTime(2014, 09, 28, 8, 0, 0);
         //    var anonymousCustomerDoSearch = _autoFixture.Create<Customer>();
         //    const string cityToSearchFor = "Berlin";
 
         //    //Act
-        //    var actualResult = systemUnderTest.FindAvailableCarsForRental(anonymousCustomerDoSearch, requestedReservationStart, requestedReservationEnd, cityToSearchFor);
+        //    var actualResult = mockSystemUnderTestObject.FindAvailableCarsForRental(anonymousCustomerDoSearch,
+        //        requestedReservationStart, requestedReservationEnd, cityToSearchFor);
 
         //    //Assert
         //    var expectedResult = 3;
-        //    Assert.True(actualResult.Count == expectedResult);
+        //    foreach (var item in actualResult)
+        //    {
+        //        Assert.IsTrue(item.OfficeId == expectedResult);
+        //    }
         //}
-        //[Fact]
+
+        //[TestMethod]
         //public void SearchInSalzburg_Returns1Cars()
         //{
         //    //Arrange
-        //    var systemUnderTest = new CarService();
+        //    var mockSystemUnderObject = new Mock<ICarService>();
+        //    var mockSystemUnderTestObject = mockSystemUnderObject.Object;
         //    var requestedReservationStart = new DateTime(2014, 05, 24, 8, 0, 0);
         //    var requestedReservationEnd = new DateTime(2014, 06, 01, 8, 0, 0);
         //    var anonymousCustomerDoSearch = _autoFixture.Create<Customer>();
         //    const string cityToSearchFor = "Salzburg";
 
         //    //Act
-        //    var actualResult = systemUnderTest.FindAvailableCarsForRental(anonymousCustomerDoSearch, requestedReservationStart, requestedReservationEnd, cityToSearchFor);
+        //    var actualResult = mockSystemUnderTestObject.FindAvailableCarsForRental(anonymousCustomerDoSearch,
+        //        requestedReservationStart, requestedReservationEnd, cityToSearchFor);
 
         //    //Assert
         //    var expectedResult = 1;
-        //    Assert.True(actualResult.Count == expectedResult);
+        //    foreach (var item in actualResult)
+        //    {
+        //        Assert.AreEqual(expectedResult, item.OfficeId);
+        //    }
         //}
 
         //[Fact]

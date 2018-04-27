@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using CarRental.Models;
+using CarRental.Entities;
 using CarRental.Repositories;
-using CarRental.Services;
 namespace CarRental.Services
 {
-    public class ReservationService : IReservationService, IDisposable
+    public class ReservationService : IDisposable
     {
         public CarRentalDbContext carRentalDbContext;
-        public IEnumerable<CarModel> resultOfAvailableCars;
+        public IEnumerable<Car> resultOfAvailableCars;
         public ReservationService()
         {
             carRentalDbContext = new CarRentalDbContext();
         }
         [Description("FindAvailableCars")]
-        public IEnumerable<CarModel> FindAvailableCars(DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string cityForRequestedReservation)
+        public IEnumerable<Car> FindAvailableCars(DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string cityForRequestedReservation)
         {
             var idsOfCarsNotAvailableNow =
                 carRentalDbContext.Reservations
@@ -25,9 +24,8 @@ namespace CarRental.Services
 
             var availableCars = carRentalDbContext.Cars.Where(car =>
                                                                       !idsOfCarsNotAvailableNow.Contains(car.CarId) && car.Office.City == cityForRequestedReservation);
-            try
-            {
-                resultOfAvailableCars = availableCars.Select(availableCar => new CarModel
+         
+                resultOfAvailableCars = availableCars.Select(availableCar => new Car
                 {
                     CarId = availableCar.CarId,
                     Category = availableCar.Category,
@@ -35,7 +33,7 @@ namespace CarRental.Services
                     KilometerReading = availableCar.KilometerReading,
                     LicenceNumber = availableCar.LicenceNumber,
                     OfficeId = availableCar.OfficeId,
-                    Office = new OfficeModel
+                    Office = new Office
                     {
                         City = availableCar.Office.City,
                         Country = availableCar.Office.Country,
@@ -44,15 +42,10 @@ namespace CarRental.Services
                         Street = availableCar.Office.Street
                     }
                 }).ToList();
-            }
-            catch
-            {
-                throw new Exception();
-            }
 
             return resultOfAvailableCars;
         }
-        public void TakeCarReservervation(CustomerModel customer, DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city)
+        public void TakeCarReservervation(Customer customer, DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city)
         {
             throw new NotImplementedException();
         }

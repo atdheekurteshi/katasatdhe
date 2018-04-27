@@ -2,7 +2,6 @@
 {
     public class Car
     {
-       
         public const string Small = "A";
         public const string Medium = "B";
         public const string Large = "C";
@@ -14,11 +13,5 @@
         public string Category { get; set; }
         public Office Office { get; set; }
         public int OfficeId { get; set; }
-
-        //public void AddKilometers(float kilometersDriven)
-        //{
-        //    KilometerReading += kilometersDriven;
-        //}
-
     }
 }

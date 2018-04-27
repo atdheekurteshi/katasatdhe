@@ -1,5 +1,5 @@
 ﻿using System;
-using CarRental.Models;
+using CarRental.Entities;
 using CarRental.Services;
 
 namespace CarRental.BusinessLayer
@@ -7,14 +7,14 @@ namespace CarRental.BusinessLayer
     public class CarRentalBusinessLayer
     {
         public CustomerService customerService;
-        public CustomerModel newCustomer;
+        public Customer newCustomer;
         public CarRentalBusinessLayer()
         {
             customerService = new CustomerService();
         }
-        public void CreateNewCustomer(CustomerModel customer)
+        public void CreateNewCustomer(Customer customer)
         {
-            newCustomer = new CustomerModel
+            newCustomer = new Customer
             {
                 CustomerNumber = Guid.NewGuid().ToString(),
                 FirstName = customer.FirstName,

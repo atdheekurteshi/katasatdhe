@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -83,6 +86,7 @@
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
@@ -92,6 +96,13 @@
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.4.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.4.0\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -104,10 +115,13 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Services\Calculate.cs" />
     <Compile Include="Services\CarService.cs" />
     <Compile Include="IServices\ICustomerService.cs" />
     <Compile Include="IServices\IReservationService.cs" />
     <Compile Include="IServices\ICarService.cs" />
+    <Compile Include="Services\ICalculate.cs" />
+    <Compile Include="Services\Person.cs" />
     <Compile Include="Services\ReservationService.cs" />
     <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -120,10 +134,6 @@
     <ProjectReference Include="..\CarRental.Entities\CarRental.Entities.csproj">
       <Project>{0337AE02-1B55-46D4-84D2-7465F1377332}</Project>
       <Name>CarRental.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CarRental.Models\CarRental.Models.csproj">
-      <Project>{63be2a89-8c7f-4e04-81a2-88aaa0697b35}</Project>
-      <Name>CarRental.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\CarRental.Repositories\CarRental.Repositories.csproj">
       <Project>{bc0feffb-8d93-4174-8846-04e64ecd635b}</Project>

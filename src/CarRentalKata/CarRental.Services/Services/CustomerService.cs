@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using CarRental.Entities;
-using CarRental.Models;
 using CarRental.Repositories;
 
 namespace CarRental.Services
@@ -11,14 +10,14 @@ namespace CarRental.Services
         public ReservationService reservationService;
         public Customer newCustomerEntity;
         public CarRentalDbContext carRentalDbContext;
-        public CustomerModel customerModel = null;
+        public Customer customerModel = null;
         public Customer foundCustomer;
         public CustomerService()
         {
             reservationService = new ReservationService();
             carRentalDbContext = new CarRentalDbContext();
         }
-        public void AddCustomer(CustomerModel customerModel)
+        public void AddCustomer(Customer customerModel)
         {
             try
             {
@@ -43,7 +42,7 @@ namespace CarRental.Services
                 throw new Exception();
             }
         }
-        public CustomerModel GetCustomerByCustomerNumber(string customerNumber)
+        public Customer GetCustomerByCustomerNumber(string customerNumber)
         {
             try
             {
@@ -51,7 +50,7 @@ namespace CarRental.Services
 
                 if (foundCustomer != null)
                 {
-                    customerModel = new CustomerModel
+                    customerModel = new Customer
                     {
                         CustomerType = foundCustomer.CustomerType,
                         City = foundCustomer.City,
@@ -72,7 +71,7 @@ namespace CarRental.Services
 
             return customerModel;
         }
-        public void CreateCarReservation(CustomerModel customer, DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city)
+        public void CreateCarReservation(Customer customer, DateTime requestedReservationStartDateTime, DateTime requestedReservationEndDateTime, string city)
         {
             try
             {
